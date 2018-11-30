@@ -1,5 +1,9 @@
 package lw.books.htw.c1;
 
+import com.sun.deploy.net.HttpRequest;
+import org.apache.catalina.servlet4preview.http.HttpServletRequestWrapper;
+
+import javax.servlet.http.HttpServlet;
 import java.io.*;
 import java.net.*;
 
