@@ -1,4 +1,4 @@
-package lw.books.htw.c2;
+import lw.books.htw.utils.Constants;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -26,6 +26,7 @@ public class PrimitiveServlet implements Servlet {
 
         System.out.println("from service");
         PrintWriter out = res.getWriter();
+        out.write(Constants.OKMSG);
         out.println("Hello. Java");
         out.print(" fff and lll");
     }

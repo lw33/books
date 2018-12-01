@@ -1,6 +1,6 @@
 package lw.books.htw.c1;
 
-import lw.books.htw.utils.Constant;
+import lw.books.htw.utils.Constants;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,7 +44,7 @@ public class HttpServer {
                 response.setRequest(request);
                 response.sendStaticResource();
                 socket.close();
-                shutdown = request.getUri().equals(Constant.SHUTDOWN_COMMAND);
+                shutdown = request.getUri().equals(Constants.SHUTDOWN_COMMAND);
             } catch (Exception e) {
                 e.printStackTrace();
                 continue;

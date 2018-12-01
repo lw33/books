@@ -4,7 +4,7 @@ package lw.books.htw.utils;
  * @Author lw
  * @Date 2018-11-30 18:16:13
  **/
-public interface Constant {
+public interface Constants {
     String WEB_ROOT = "F:\\WorkSpace\\IDEA2018\\books\\htw\\webroot";
 
 

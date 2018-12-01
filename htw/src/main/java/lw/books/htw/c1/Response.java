@@ -1,6 +1,6 @@
 package lw.books.htw.c1;
 
-import lw.books.htw.utils.Constant;
+import lw.books.htw.utils.Constants;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,14 +35,14 @@ public class Response {
             if (request.getUri() == null) {
                 notFount();
                 return;
-            } else if (request.getUri().equals(Constant.SHUTDOWN_COMMAND)) {
-                write(Constant.SHUTDOWNMSG);
+            } else if (request.getUri().equals(Constants.SHUTDOWN_COMMAND)) {
+                write(Constants.SHUTDOWNMSG);
                 return;
             }
 
-            File file = new File(Constant.WEB_ROOT, request.getUri());
+            File file = new File(Constants.WEB_ROOT, request.getUri());
             if (file.exists()) {
-                output.write(Constant.OKMSG.getBytes());
+                output.write(Constants.OKMSG.getBytes());
                 fin = new FileInputStream(file);
                 int ch = fin.read(bytes, 0, BUFFER_SIZE);
                 while (ch != -1) {
@@ -74,7 +74,7 @@ public class Response {
     }
     private void notFount() {
         try {
-            output.write(Constant.NOFOUNTMSG.getBytes());
+            output.write(Constants.NOFOUNTMSG.getBytes());
         } catch (IOException e1) {
             e1.printStackTrace();
         }

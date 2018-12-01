@@ -1,7 +1,6 @@
 package lw.books.htw.c2;
 
-import com.sun.org.apache.bcel.internal.generic.FNEG;
-import lw.books.htw.utils.Constant;
+import lw.books.htw.utils.Constants;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletResponse;
@@ -29,11 +28,11 @@ public class Response implements ServletResponse {
     public void sendStaticResource() {
         FileInputStream fin = null;
         try {
-            File file = new File(Constant.WEB_ROOT, request.getUri());
+            File file = new File(Constants.WEB_ROOT, request.getUri());
             if (file.exists()) {
                 fin = new FileInputStream(file);
-                byte[] buffer = new byte[Constant.SMALL_BUFFER_SIZE];
-                output.write(Constant.OKMSG.getBytes());
+                byte[] buffer = new byte[Constants.SMALL_BUFFER_SIZE];
+                output.write(Constants.OKMSG.getBytes());
                 int i = fin.read(buffer);
 
                 while (i != -1) {
@@ -41,7 +40,7 @@ public class Response implements ServletResponse {
                     i = fin.read(buffer);
                 }
             } else {
-                output.write(Constant.NOFOUNTMSG.getBytes());
+                output.write(Constants.NOFOUNTMSG.getBytes());
             }
         } catch (IOException e) {
             e.printStackTrace();
