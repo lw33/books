@@ -59,10 +59,7 @@ public class Response implements ServletResponse {
         return null;
     }
 
-    @Override
-    public String getContentType() {
-        return null;
-    }
+
 
     @Override
     public ServletOutputStream getOutputStream() throws IOException {
@@ -75,20 +72,13 @@ public class Response implements ServletResponse {
         return printWriter;
     }
 
-    @Override
-    public void setCharacterEncoding(String charset) {
 
-    }
 
     @Override
     public void setContentLength(int len) {
 
     }
 
-    @Override
-    public void setContentLengthLong(long len) {
-
-    }
 
     @Override
     public void setContentType(String type) {
