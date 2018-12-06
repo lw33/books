@@ -1,3 +1,5 @@
+package lw.books.htw.c16;
+
 import lw.books.htw.utils.Constants;
 
 import javax.servlet.*;
@@ -10,10 +12,12 @@ import java.io.PrintWriter;
  **/
 public class PrimitiveServlet implements Servlet {
 
+    public String string = "java";
+
     @Override
     public void init(ServletConfig config) throws ServletException {
 
-        System.out.println("PrimitiveServlet.init");
+        System.out.println("lw.books.htw.c16.PrimitiveServlet.init");
     }
 
     @Override
@@ -39,6 +43,6 @@ public class PrimitiveServlet implements Servlet {
     @Override
     public void destroy() {
 
-        System.out.println("PrimitiveServlet.destroy");
+        System.out.println("lw.books.htw.c16.PrimitiveServlet.destroy");
     }
 }
