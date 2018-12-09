@@ -1,5 +1,6 @@
 package lw.learning.books.chapter2.service;
 
+import lw.learning.books.chapter2.helper.DatabaseHelper;
 import lw.learning.books.chapter2.model.Customer;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,7 +20,8 @@ public class CustomerServiceTest {
 
     @Before
     public void init() {
-        // TODO 2018/12/7 初始化数据库
+        String file = "sql/customer_init.sql";
+        DatabaseHelper.executeSqlFile(file);
     }
 
     @Test

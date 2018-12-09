@@ -12,7 +12,9 @@ CREATE TABLE: CREATE TABLE `customer` (
 
 	
 INSERT INTO customer(`name`, contact, telephone, email, remark) VALUES
-		("customer1", "Jack", 10086, "jack@gmail.com"),
-		("customer2", "Rose", 10010, "rose@gmail.com");
+		("customer1", "Jack", 10086, "jack@gmail.com", NULL),
+		("customer2", "Rose", 10010, "rose@gmail.com", NULL);
 		
 SHOW CREATE TABLE customer;
+
+SELECT * FROM customer;
