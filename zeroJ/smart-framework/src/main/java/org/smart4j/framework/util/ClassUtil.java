@@ -26,6 +26,10 @@ public class ClassUtil {
         return Thread.currentThread().getContextClassLoader();
     }
 
+    public static Class<?> loadClass(String className) {
+        return loadClass(className, true);
+    }
+
     public static Class<?> loadClass(String className, boolean isInitialized) {
         Class<?> cls;
         try {
@@ -84,7 +88,7 @@ public class ClassUtil {
 
     private static void addClass(Set<Class<?>> classSet, String packagePath, String packageName) {
         // 获取包路径下的所有 class 文件与 目录
-        File[] files = new File(packagePath).listFiles(file -> file.isFile() && file.getName().equals(".class") || file.isDirectory());
+        File[] files = new File(packagePath).listFiles(file -> file.isFile() && file.getName().endsWith(".class") || file.isDirectory());
         for (File file : files) {
             String fileName = file.getName();
             if (file.isFile()) {
@@ -97,14 +101,14 @@ public class ClassUtil {
                 // 修改路径与包名 对目录进行递归调用
                 String subPackageName = fileName;
                 if (StringUtil.isNotEmpty(packageName)) {
-                    packageName = packageName + "." + subPackageName;
+                    subPackageName = packageName + "." + subPackageName;
                 }
                 String subPathName = fileName;
                 if (StringUtil.isNotEmpty(packagePath)) {
-                    packagePath = packageName + "/" + subPathName;
+                    subPathName = packagePath + "/" + subPathName;
                 }
                 // recursive
-                addClass(classSet, packagePath, packageName);
+                addClass(classSet, subPathName, subPackageName);
             }
         }
     }
