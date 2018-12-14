@@ -5,6 +5,7 @@ import books.zeroJ.chapter3.service.Service;
 import org.smart4j.framework.annotation.Action;
 import org.smart4j.framework.annotation.Inject;
 import org.smart4j.framework.bean.Data;
+import org.smart4j.framework.bean.Param;
 
 /**
  * @Author lw
@@ -18,12 +19,13 @@ public class Controller {
     Service service;
 
     @Action("get:/test")
-    public Data test() {
-        return new Data("Thinking in java");
+    public Data test(Param param) {
+        return new Data(param);
     }
 
     @Action("get:/service")
-    public Data service() {
+    public Data service(Param param) {
+        System.out.println(param);
         return new Data(service.toString());
     }
 }

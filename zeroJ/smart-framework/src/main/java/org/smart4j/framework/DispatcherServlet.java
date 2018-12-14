@@ -63,7 +63,7 @@ public class DispatcherServlet extends HttpServlet {
             }
             Param param = new Param(paramMap);
             Method actionMethod = handler.getActionMethod();
-            Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
+            Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
             if (result instanceof View) {
                 View view = (View) result;
                 String path = view.getPath();
@@ -90,5 +90,6 @@ public class DispatcherServlet extends HttpServlet {
                 }
             }
         }
+
     }
 }

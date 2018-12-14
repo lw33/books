@@ -25,7 +25,7 @@ public class View {
         model = new HashMap<>();
     }
 
-    public View addModel(String key, String value) {
+    public View addModel(String key, Object value) {
         model.put(key, value);
         return this;
     }
