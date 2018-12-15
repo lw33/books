@@ -83,6 +83,12 @@
             <version>2.1.1</version>
         </dependency>
 
+        <!--CGLIB-->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.8</version>
+        </dependency>
     </dependencies>
 
 </project>
