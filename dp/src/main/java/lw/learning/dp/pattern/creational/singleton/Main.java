@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * @Author lw
@@ -14,14 +15,25 @@ import java.lang.reflect.InvocationTargetException;
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        HungrySingleton instance = HungrySingleton.getInstance();
+        /*HungrySingleton instance = HungrySingleton.getInstance();
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("singleton"));
         oos.writeObject(instance);
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("singleton"));
         HungrySingleton newInstance = (HungrySingleton) ois.readObject();
         System.out.println(instance);
         System.out.println(newInstance);
-        System.out.println(instance == newInstance);
+        System.out.println(instance == newInstance);*/
+
+        Runnable runnable = () -> {
+            ContainerSingleton.putInstance("java", new Object());
+            Object java = ContainerSingleton.getInstance("java");
+            System.out.println(java);
+        };
+
+        Thread t1 = new Thread(runnable);
+        Thread t2 = new Thread(runnable);
+        t1.start();
+        t2.start();
     }
 
     @Test
@@ -58,5 +70,19 @@ public class Main {
         System.out.println(instance == newInstance);
         System.out.println(instance.getData() == newInstance.getData());
         System.out.println(instance.getData());
+    }
+
+    @Test
+    public void test3() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        EnumInstance.INSTANCE.test();
+        //EnumInstance.INSTANCE.java();
+        EnumInstance instance = EnumInstance.INSTANCE;
+        Method java = EnumInstance.class.getMethod("java", null);
+        java.invoke(instance, null);
+    }
+
+    @Test
+    public void test4() {
+
     }
 }
