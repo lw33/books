@@ -7,7 +7,6 @@ import org.smart4j.framework.bean.View;
 import org.smart4j.framework.helper.BeanHelper;
 import org.smart4j.framework.helper.ConfigHelper;
 import org.smart4j.framework.helper.ControllerHelper;
-import org.smart4j.framework.helper.HelperLoader;
 import org.smart4j.framework.util.JsonUtil;
 import org.smart4j.framework.util.ReflectionUtil;
 import org.smart4j.framework.util.StringUtil;
@@ -54,16 +53,24 @@ public class DispatcherServlet extends HttpServlet {
         if (handler != null) {
             Class<?> controllerClass = handler.getControllerClass();
             Object controllerBean = BeanHelper.getBean(controllerClass);
-            Map<String, Object> paramMap = new HashMap<>();
-            Enumeration<String> parameterNames = req.getParameterNames();
-            while (parameterNames.hasMoreElements()) {
-                String paramName = parameterNames.nextElement();
-                String paramValue = req.getParameter(paramName);
-                paramMap.put(paramName, paramValue);
-            }
-            Param param = new Param(paramMap);
             Method actionMethod = handler.getActionMethod();
-            Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+            // 获取方法参数个数
+            int parameterCount = actionMethod.getParameterCount();
+            Object result;
+            // 通过判断方法参数个数决定否传入参数
+            if (parameterCount > 0) {
+                Map<String, Object> paramMap = new HashMap<>();
+                Enumeration<String> parameterNames = req.getParameterNames();
+                while (parameterNames.hasMoreElements()) {
+                    String paramName = parameterNames.nextElement();
+                    String paramValue = req.getParameter(paramName);
+                    paramMap.put(paramName, paramValue);
+                }
+                Param param = new Param(paramMap);
+                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+            } else {
+                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
+            }
             if (result instanceof View) {
                 View view = (View) result;
                 String path = view.getPath();

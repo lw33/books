@@ -1,6 +1,7 @@
 package org.smart4j.framework.bean;
 
 import org.smart4j.framework.util.CastUtil;
+import org.smart4j.framework.util.CollectionUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,14 @@ public class Param {
 
     public long getLong(String name) {
         return CastUtil.castLong(paramMap.get(name));
+    }
+
+    /**
+     * 验证参数是否为空
+     * @return
+     */
+    public boolean isEmpty() {
+        return CollectionUtil.isEmpty(paramMap);
     }
    /* *//**
      * 获取请求参数映射
