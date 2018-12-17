@@ -1,7 +1,7 @@
-package books.zeroJ.chapter3.controller;
+package books.zeroJ.chapter4.controller;
 
-import books.zeroJ.chapter3.model.Customer;
-import books.zeroJ.chapter3.service.CustomerService;
+import books.zeroJ.chapter4.model.Customer;
+import books.zeroJ.chapter4.service.CustomerService;
 import org.smart4j.framework.annotation.Action;
 import org.smart4j.framework.annotation.Controller;
 import org.smart4j.framework.annotation.Inject;
@@ -26,7 +26,7 @@ public class CustomerController {
      * 进入 客户列表 界面
      */
     @Action("get:/customer")
-    public View index() {
+    public View index(Param param) {
         List<Customer> customerList = customerService.getCustomerList();
         return new View("customer.jsp").addModel("customerList", customerList);
     }

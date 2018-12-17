@@ -1,8 +1,7 @@
-package books.zeroJ.chapter3.service;
+package books.zeroJ.chapter4.service;
 
-import books.zeroJ.chapter3.model.Customer;
+import books.zeroJ.chapter4.model.Customer;
 import org.smart4j.framework.annotation.Service;
-import org.smart4j.framework.annotation.Transaction;
 import org.smart4j.framework.helper.DatabaseHelper;
 
 import java.util.List;
@@ -17,7 +16,6 @@ public class CustomerService {
     /**
      * 获取客户列表
      */
-    @Transaction
     public List<Customer> getCustomerList() {
         String sql = "SELECT * FROM customer";
         return DatabaseHelper.queryEntityList(Customer.class, sql);
@@ -41,7 +39,6 @@ public class CustomerService {
     /**
      * 更新客户
      */
-    @Transaction
     public boolean updateCustomer(long id, Map<String, Object> fieldMap) {
         return DatabaseHelper.updateEntity(Customer.class, id, fieldMap);
     }
