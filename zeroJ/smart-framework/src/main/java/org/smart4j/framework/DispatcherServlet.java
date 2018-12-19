@@ -49,42 +49,49 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String requestMethod = req.getMethod().toLowerCase();
-        String requestPath = req.getPathInfo();
-        if (requestPath.equals("/favicon.ico")) {
-            return;
-        }
-        Handler handler = ControllerHelper.getHandler(requestMethod, requestPath);
-        if (handler != null) {
-            Class<?> controllerClass = handler.getControllerClass();
-            Object controllerBean = BeanHelper.getBean(controllerClass);
-            Method actionMethod = handler.getActionMethod();
-            // 获取方法参数个数
-            int parameterCount = actionMethod.getParameterCount();
-            Object result;
-            // 通过判断方法参数个数决定否传入参数
-            if (parameterCount > 0) {
-                Param param;
-                if (UploadHelper.isMultipart(req)) {
-                    param = UploadHelper.createParam(req);
+        ServletHelper.init(req, resp);
+        try {
+
+            String requestMethod = req.getMethod().toLowerCase();
+            String requestPath = req.getPathInfo();
+            if (requestPath.equals("/favicon.ico")) {
+                return;
+            }
+            Handler handler = ControllerHelper.getHandler(requestMethod, requestPath);
+            if (handler != null) {
+                Class<?> controllerClass = handler.getControllerClass();
+                Object controllerBean = BeanHelper.getBean(controllerClass);
+                Method actionMethod = handler.getActionMethod();
+                // 获取方法参数个数
+                int parameterCount = actionMethod.getParameterCount();
+                Object result;
+                // 通过判断方法参数个数决定否传入参数
+                if (parameterCount > 0) {
+                    Param param;
+                    if (UploadHelper.isMultipart(req)) {
+                        param = UploadHelper.createParam(req);
+                    } else {
+                        param = RequestHelper.crateParam(req);
+                    }
+                    result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
                 } else {
-                    param = RequestHelper.crateParam(req);
+                    result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
                 }
-                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
-            } else {
-                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
+                if (result instanceof View) {
+                    handleViewResult(req, resp, (View) result);
+                } else if (result instanceof Data) {
+                    handleDataResult(resp, (Data) result);
+                }
             }
-            if (result instanceof View) {
-                handleViewResult(req, resp, (View) result);
-            } else if (result instanceof Data) {
-                handleDataResult(resp, (Data) result);
-            }
+        } finally {
+            ServletHelper.destroy();
         }
 
     }
 
     /**
      * 处理视图
+     *
      * @param req
      * @param resp
      * @param result
@@ -106,6 +113,7 @@ public class DispatcherServlet extends HttpServlet {
 
     /**
      * 处理数据
+     *
      * @param resp
      * @param result
      * @throws IOException

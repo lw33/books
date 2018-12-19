@@ -54,7 +54,7 @@ public class CustomerController {
      */
     @Action("post:/customer_create")
     public Data createSubmit(Param param) {
-        Map<String, Object> fieldMap = param.getMap();
+        Map<String, Object> fieldMap = param.getFieldMap();
         boolean result = customerService.createCustomer(fieldMap);
         return new Data(result);
     }
@@ -77,7 +77,7 @@ public class CustomerController {
         long id = param.getLong("id");
         System.out.println(param);
         //Map<String, Object> fieldMap = param.getFieldMap();
-        Map<String, Object> map = param.getMap();
+        Map<String, Object> map = param.getFieldMap();
         boolean result = customerService.updateCustomer(id, map);
         return new Data(result);
     }

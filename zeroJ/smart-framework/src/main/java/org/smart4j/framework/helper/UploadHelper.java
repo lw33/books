@@ -62,6 +62,7 @@ public final class UploadHelper {
 
     /**
      * 创建请求参数
+     *
      * @param request
      * @return
      * @throws IOException
@@ -127,6 +128,7 @@ public final class UploadHelper {
 
     /**
      * 批量上传文件
+     *
      * @param basePath
      * @param fileParamList
      */
@@ -137,4 +139,6 @@ public final class UploadHelper {
             }
         }
     }
+
+
 }
