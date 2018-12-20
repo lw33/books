@@ -1,4 +1,9 @@
+### spring boot ###
 /target/
+target/
+.mvn
+mvnw
+mvnw.cmd
 
 ### STS ###
 .apt_generated

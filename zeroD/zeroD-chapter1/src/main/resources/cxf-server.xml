@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<import resource="classpath:cxf.xml"/>
+<import resource="classpath:cxf-servlet.xml"/>
+<jaxws:endpoint id="helloWorld" impementor=""/>

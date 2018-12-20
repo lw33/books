@@ -12,7 +12,6 @@ import java.rmi.server.RMISocketFactory;
 public class CustomerSocketFactory extends RMISocketFactory {
     @Override
     public Socket createSocket(String host, int port) throws IOException {
-
         return new Socket(host, port);
     }
 
