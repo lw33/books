@@ -6,12 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标记线程安全类
+ * 建议写法
  * @Author lw
  * @Date 2018-12-20 22:48:11
  **/
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
-public @interface ThreadSafe {
+public @interface Recommend {
     String value() default "";
 }
