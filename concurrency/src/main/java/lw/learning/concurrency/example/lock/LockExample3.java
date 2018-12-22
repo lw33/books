@@ -1,4 +1,4 @@
-package lw.learning.concurrency.example.count;
+package lw.learning.concurrency.example.lock;
 
 import lombok.extern.slf4j.Slf4j;
 import lw.learning.concurrency.annotation.NotThreadSafe;
@@ -7,6 +7,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.StampedLock;
 
 /**
  * @Author lw
@@ -14,13 +15,15 @@ import java.util.concurrent.Semaphore;
  **/
 @Slf4j
 @NotThreadSafe
-public class CountExample1 {
+public class LockExample3 {
 
     public static int clientTotal = 5000;
 
     public static int threadTotal = 200;
 
     public static int count = 0;
+
+    private static StampedLock lock = new StampedLock();
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -47,9 +50,13 @@ public class CountExample1 {
     }
 
     public static  void add() {
-        synchronized (CountExample1.class) {
+        long l = lock.writeLock();
+        try {
             count++;
+        } finally {
+            lock.unlock(l);
         }
     }
+
 
 }
