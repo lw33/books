@@ -1,3 +1,5 @@
+package net.captrue;
+
 import jpcap.JpcapCaptor;
 import jpcap.NetworkInterface;
 import jpcap.packet.IPPacket;
@@ -10,7 +12,7 @@ import java.io.IOException;
  * @Author lw
  * @Date 2018-12-26 16:29:12
  **/
-public class Test {
+public class IPCapture {
 
     public static void main(String[] args) {
         /*--------------	第一步绑定网络设备       --------------*/
@@ -27,7 +29,6 @@ public class Test {
 
         try {
             jpcap = JpcapCaptor.openDevice(devices[2], caplen, promiscCheck, 50);
-            //0 或 1
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,9 +39,9 @@ public class Test {
         //while (true){
             Packet packet = jpcap.getPacket();
             if (packet instanceof IPPacket && ((IPPacket) packet).version == 4 ) {
-                i++;
-                IPPacket ip = (IPPacket) packet;// 强转
 
+                IPPacket ip = (IPPacket) packet;// 强转
+                i++;
                 System.out.println("版本：IPv4");
                 System.out.println("优先权：" + ip.priority);
                 System.out.println("区分服务：最大的吞吐量： " + ip.t_flag);
@@ -48,7 +49,7 @@ public class Test {
                 System.out.println("长度：" + ip.length);
                 System.out.println("标识：" + ip.ident);
                 System.out.println("DF:Don't Fragment: " + ip.dont_frag);
-                System.out.println("NF:Nore Fragment: " + ip.more_frag);
+                System.out.println("MF:More Fragment: " + ip.more_frag);
                 System.out.println("片偏移：" + ip.offset);
                 System.out.println("生存时间：" + ip.hop_limit);
 

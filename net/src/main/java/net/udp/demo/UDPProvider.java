@@ -1,4 +1,4 @@
-package net.udp;
+package net.udp.demo;
 
 
 import java.net.DatagramPacket;
@@ -13,7 +13,7 @@ public class UDPProvider {
     public static void main(String[] args) throws Exception {
 
         // 作为接收者 指定端口
-        DatagramSocket datagramSocket = new DatagramSocket(8088);
+        DatagramSocket datagramSocket = new DatagramSocket(6666);
 
         // 构建接收实体
         final byte[] bytes = new byte[1024];

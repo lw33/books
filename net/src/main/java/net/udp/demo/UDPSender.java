@@ -1,4 +1,4 @@
-package net.udp;
+package net.udp.demo;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
