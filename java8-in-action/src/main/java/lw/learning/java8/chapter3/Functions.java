@@ -1,5 +1,7 @@
 package lw.learning.java8.chapter3;
 
+import lw.learning.java8.entity.Apple;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,13 @@ public class Functions {
         for (int i = 0; i < 100; i++) {
             System.out.println(intPredicate.test(i));
         }
+
+        int i = 1337;
+        int finalI = i;
+        Runnable runnable = () -> System.out.println(finalI);
+        i = 100;
+        map(strings, Apple::new);
+
     }
 
 
