@@ -11,9 +11,11 @@ public class Benchmark {
     public static void main(String[] args) {
         int times = 10;
         int n = 1_000_000;
-        test(times, n, GroupBy::partitionPrimes);
+
         test(times, n, PrimeNumbersCollector::partitionPrimesWithCustomCollectorRaw);
         test(times, n, PrimeNumbersCollector::partitionPrimesWithCustomCollector);
+        test(times, n, GroupBy::partitionPrimes);
+
     }
 
     public static void test(int times,int n, Consumer<Integer> consumer) {
