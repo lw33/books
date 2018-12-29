@@ -1,40 +1,36 @@
-package lw.learning.java8.chapter5;
+package lw.learning.java8.chapter6;
 
 import lw.learning.java8.entity.Dish;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 
 /**
  * @Author lw
- * @Date 2018-12-28 23:13:53
+ * @Date 2018-12-29 19:46:10
  **/
-public class BasicTypeStream {
+public class CollectorsTest {
 
     public static void main(String[] args) {
+
         List<Dish> menu = Dish.menu;
 
         System.out.println("\n=========================================================\n");
 
         System.out.println(menu.stream()
-                .mapToInt(Dish::getCalories)
-                .sum());
+                .collect(new ToListCollector<>()));
 
         System.out.println("\n=========================================================\n");
 
-        OptionalInt max = menu.stream()
-                .mapToInt(Dish::getCalories)
-                .max();
-        System.out.println(max);
+        System.out.println(menu.stream()
+                .collect(Collectors.toList()));
 
         System.out.println("\n=========================================================\n");
 
-        IntStream.range(1, 100)
-                .forEach(System.out::print);
-        System.out.println();
-        IntStream.rangeClosed(1, 100)
-                .forEach(System.out::print);
+        ArrayList<Dish> collect = menu.stream()
+                .collect(ArrayList::new, List::add, List::addAll);
+        System.out.println(collect);
 
         System.out.println("\n=========================================================\n");
 
