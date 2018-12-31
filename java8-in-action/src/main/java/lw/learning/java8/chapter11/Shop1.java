@@ -9,7 +9,7 @@ import java.util.concurrent.Future;
  * @Author lw
  * @Date 2018-12-30 21:36:17
  **/
-public class Shop {
+public class Shop1 {
 
     private String name;
 
@@ -21,9 +21,10 @@ public class Shop {
         this.name = name;
     }
 
-    public Shop(String name) {
+    public Shop1(String name) {
         this.name = name;
     }
+
 
     public double getPrice(String product) {
         return calculatePrice(product);
@@ -51,7 +52,7 @@ public class Shop {
     public Future<Double> getPriceAsyncBySupplyAsync(String product) {
         return CompletableFuture.supplyAsync(() -> calculatePrice(product));
     }
-    public Shop() {
+    public Shop1() {
     }
 
     public void doSomethingElse() {
@@ -67,7 +68,7 @@ public class Shop {
     }
 
     public static void main(String[] args) {
-        Shop shop = new Shop();
+        Shop1 shop = new Shop1();
         long start = System.nanoTime();
         System.out.println(shop.getPrice("javac"));
         long invocationTime = (System.nanoTime() - start) / 1_000_000;

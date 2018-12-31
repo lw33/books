@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static lw.learning.java8.chapter11.Benchmark.test;
 
 /**
  * @Author lw
@@ -14,11 +15,11 @@ import java.util.stream.Collectors;
  **/
 public class BestPriceFinder1 {
 
-    private static final List<Shop> shops = Arrays.asList(new Shop("BestPrice"),
-            new Shop("LetsSaveBig"),
-            new Shop("MyFavoriteShop"),
-            new Shop("BuyItAll"),
-            new Shop("ShopEasy"));
+    public static final List<Shop1> shops = Arrays.asList(new Shop1("BestPrice"),
+            new Shop1("LetsSaveBig"),
+            new Shop1("MyFavoriteShop"),
+            new Shop1("BuyItAll"),
+            new Shop1("ShopEasy"));
 
     private static final Executor EXECUTOR = Executors.newFixedThreadPool(Math.min(shops.size(), 100), r -> {
         Thread t = new Thread(r);
@@ -62,10 +63,5 @@ public class BestPriceFinder1 {
         test(BestPriceFinder1::findPricesFutureExecutor, "javac");
     }
 
-    public static void test(Function<String, List<String>> f, String product) {
-        long start = System.nanoTime();
-        System.out.println(f.apply(product));
-        long duration = (System.nanoTime() - start) / 1_000_000;
-        System.out.println("Done in " + duration + " msecs");
-    }
+
 }
