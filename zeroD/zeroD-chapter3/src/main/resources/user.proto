@@ -1,0 +1,11 @@
+syntax = "proto2";
+package books.zeroD.chapter2.serialize;
+
+option java_package = "books.zeroD.chapter2.serialize";
+option java_outer_classname = "User";
+
+message User {
+    required string name = 1;
+    required int32 age = 2;
+    required string gender = 3;
+}
