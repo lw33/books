@@ -16,6 +16,8 @@ public class Test {
         test(user, new XML2Serializer());
         test(user, new JsonSerializer());
         test(user, new HessianSerializer());
+        test(user, new ProtoStuffSerializer());
+        test(user, new ThriftSerializer());
     }
 
     public static void test(User user, ISerializer serializer) {
