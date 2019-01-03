@@ -13,11 +13,13 @@ public class UDPProvider {
 
     public static void main(String[] args) throws Exception {
         String sn = UUID.randomUUID().toString();
+        System.out.println("UDPProvider start...");
         Provider provider = new Provider(sn);
         provider.start();
 
         System.in.read();
         provider.exit();
+        System.out.println("UDPProvider finished");
     }
 
     private static class Provider extends Thread {
@@ -35,19 +37,17 @@ public class UDPProvider {
             try {
 
                 // 作为接收者 指定端口
-                ds = new DatagramSocket(6666);
+                ds = new DatagramSocket(8088);
                 // 构建接收实体
                 final byte[] bytes = new byte[1024];
 
                 while (!done) {
                     DatagramPacket receivePacket = new DatagramPacket(bytes, bytes.length);
 
-                    System.out.println("UDPProvider start...");
-
                     // 接收
                     ds.receive(receivePacket);
 
-                    String data = new String(receivePacket.getData(), receivePacket.getLength());
+                    String data = new String(receivePacket.getData(), 0, receivePacket.getLength());
                     int responsePort = MessageCreator.parsePort(data);
                     String responseMsg = MessageCreator.buildWithSN(sn);
                     if (responsePort != -1) {
@@ -63,7 +63,7 @@ public class UDPProvider {
 
             } finally {
                 close();
-                System.out.println("UDPProvider finished");
+
             }
         }
 

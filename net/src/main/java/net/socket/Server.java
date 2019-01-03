@@ -1,6 +1,7 @@
 package net.socket;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
@@ -23,7 +24,7 @@ public class Server {
     }
 
 
-    private static class ClientHandler extends Thread {
+    public static class ClientHandler extends Thread {
         private Socket socket;
 
         public ClientHandler(Socket socket) {
@@ -47,6 +48,12 @@ public class Server {
                 } while (true);
             } catch (Exception e) {
 
+            }finally {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

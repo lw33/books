@@ -13,7 +13,7 @@ public class UDPProvider {
     public static void main(String[] args) throws Exception {
 
         // 作为接收者 指定端口
-        DatagramSocket datagramSocket = new DatagramSocket(6666);
+        DatagramSocket datagramSocket = new DatagramSocket(8088);
 
         // 构建接收实体
         final byte[] bytes = new byte[1024];

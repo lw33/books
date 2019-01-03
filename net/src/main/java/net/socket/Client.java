@@ -49,9 +49,8 @@ public class Client {
                 break;
             }
             System.out.println(echo);
-            bufferedReader.close();
-            System.out.println(bufferedReader);
-            return;
+            //bufferedReader.close();
+            //System.out.println(bufferedReader);
         } while (true);
         socketBufferReader.close();
     }

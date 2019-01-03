@@ -9,7 +9,7 @@ public class MessageCreator {
     private static final String SN_HEAD = "got cipher, I'm (SN):";
     private static final String PORT_HEAD = "cipher, call (Port):";
 
-    public static String buildPort(int port) {
+    public static String buildWithPort(int port) {
         return PORT_HEAD + port;
     }
 
