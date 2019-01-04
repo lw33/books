@@ -44,9 +44,9 @@ public class UDPSender {
         String request = MessageCreator.buildWithPort(LISTEN_PORT);
         DatagramPacket datagramPacket = new DatagramPacket(request.getBytes(), request.length());
         datagramPacket.setPort(8088);
-        //datagramPacket.setAddress(InetAddress.getByName("255.255.255.255"));
+        datagramPacket.setAddress(InetAddress.getByName("255.255.255.255"));
         //datagramPacket.setAddress(InetAddress.getByName("localhost"));
-        datagramPacket.setAddress(InetAddress.getLocalHost());
+        //datagramPacket.setAddress(InetAddress.getLocalHost());
         datagramSocket.send(datagramPacket);
         datagramSocket.close();
         System.out.println("UDPSender sendBroadcast finished...");

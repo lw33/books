@@ -1,11 +1,15 @@
 package net.c5.server;
 
 
+import net.c5.constants.TCPConstants;
 import net.c5.constants.UDPConstants;
+import net.util.ByteUtils;
+import net.util.Tools;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.nio.ByteBuffer;
 import java.util.UUID;
 
 /**
@@ -23,14 +27,14 @@ public class ServerProvider {
         PROVIDER.start();
     }
 
-    private static void stop() {
+    public static void stop() {
         if (PROVIDER != null) {
             PROVIDER.exit();
             PROVIDER = null;
         }
     }
 
-    private static class Provider extends Thread{
+    private static class Provider extends Thread {
         private final byte[] sn;
         private final int port;
         private boolean running = true;
@@ -45,7 +49,7 @@ public class ServerProvider {
         @Override
         public void run() {
             try {
-
+                System.out.println("ServerProvider started...");
                 ds = new DatagramSocket(UDPConstants.SERVER_PORT);
                 DatagramPacket receivePacket = new DatagramPacket(buffer, buffer.length);
 
@@ -58,13 +62,42 @@ public class ServerProvider {
                     int clientDataLen = receivePacket.getLength();
                     byte[] clientData = receivePacket.getData();
 
-                    //clientDataLen >= (UDPConstants.HEADER.length + 2 + 4)
-                    //        ;
+                    // 头 口令 端口
+                    boolean isValid = clientDataLen >= (UDPConstants.HEADER.length + 2 + 4)
+                            && ByteUtils.startsWith(clientData, UDPConstants.HEADER);
+
+                    System.out.println("ServerProvider receive from ip: " + clientIP +
+                            "\tport: " + clientPort + "\tdataValid: " + isValid);
+                    if (!isValid) {
+                        continue;
+                    }
+
+                    int index = UDPConstants.HEADER.length;
+                    short cmd = (short) ((clientData[index++] << 8) | clientData[index++]);
+                    int responsePort = Tools.byteArray2Int(clientData, index, index + 3);
+
+                    // cmd 1 代表搜索
+                    if (cmd == 1 && responsePort > 0) {
+                        ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
+                        byteBuffer.put(UDPConstants.HEADER);
+                        byteBuffer.putShort((short) 2);
+                        byteBuffer.putInt(TCPConstants.SERVER_PORT);
+                        byteBuffer.put(sn);
+                        int len = byteBuffer.position();
+                        DatagramPacket datagramPacket = new DatagramPacket(buffer, len, receivePacket.getAddress(), responsePort);
+                        ds.send(datagramPacket);
+                        System.out.println("ServerProvider response to: " + clientIP + "\tport: " + responsePort + "\tdataLen: " + len);
+                    } else {
+                        System.out.println("ServerProvider receive cmd nonsupport; cmd: " + cmd);
+                    }
 
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                close();
             }
+            System.out.println("ServerProvider Finished...");
         }
 
         public void exit() {
