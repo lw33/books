@@ -1,5 +1,3 @@
-package net.captrue;
-
 import jpcap.JpcapCaptor;
 import jpcap.NetworkInterface;
 import jpcap.packet.IPPacket;
@@ -33,7 +31,7 @@ public class IPCapture {
         }
         URL resource = IPCapture.class.getResource(".");
         String file = resource.getFile();
-        String logfile = args == null || args.length == 0 ? "logfil" : args[0];
+        String logfile = args == null || args.length == 0 ? "logfile" : args[0];
         logfile = file + logfile;
         FileWriter fileWriter = null;
         try {
@@ -79,7 +77,6 @@ public class IPCapture {
                         }
                         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS");
                         String now = dateTimeFormatter.format(LocalDateTime.now());
-                        System.out.println();
                         System.out.println(now + " =========================================================");
                         String check_sum = short2binary((short) (ipPacket.header[10] << 8 | ipPacket.header[11]));
                         IP ip = new IP(ipPacket.version, ipPacket.priority, ipPacket.t_flag, ipPacket.r_flag,
@@ -88,7 +85,8 @@ public class IPCapture {
                                 ipPacket.src_ip.getHostAddress(), ipPacket.dst_ip.getHostAddress());
                         String stat = ip.toString();
                         System.out.println(stat);
-                        fileWriter.write(now + " =========================================================");
+                        System.out.println();
+                        fileWriter.write(now + " =========================================================\n");
                         fileWriter.write(stat);
                         fileWriter.write("\n");
                         fileWriter.flush();
