@@ -88,7 +88,7 @@ public class IPCapture {
                         System.out.println();
                         fileWriter.write(now + " =========================================================\n");
                         fileWriter.write(stat);
-                        fileWriter.write("\n");
+                        fileWriter.write("\n\n");
                         fileWriter.flush();
                     }
                 }
@@ -101,7 +101,6 @@ public class IPCapture {
 
     public static String short2binary(short num) {
         StringBuilder sb = new StringBuilder();
-        //while (num > 0) {
         for (int i = 0; i < 16; i++) {
             sb.insert(0, num & 1);
             num >>>= 1;

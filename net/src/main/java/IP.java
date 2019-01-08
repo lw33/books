@@ -56,7 +56,7 @@ public class IP {
         addSeparator(sb);
         sb.append("区分服务：最高的可靠性: ");
         sb.append(r_flag);
-        sb.append("\n");
+        addSeparator(sb);
         sb.append("DF:Don't Fragment: ");
         sb.append(dont_frag);
         addSeparator(sb);
@@ -71,7 +71,7 @@ public class IP {
         addSeparator(sb);
         sb.append("上层协议类型: ");
         sb.append(protocol);
-        sb.append("\n");
+        addSeparator(sb);
         sb.append("头校验和: ");
         sb.append(check_sum);
         addSeparator(sb);
@@ -84,6 +84,6 @@ public class IP {
     }
 
     private void addSeparator(StringBuilder sb) {
-        sb.append("\t");
+        sb.append("\n");
     }
 }
