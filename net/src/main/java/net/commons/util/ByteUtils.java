@@ -1,4 +1,4 @@
-package net.util;
+package net.commons.util;
 
 /**
  * @Author lw

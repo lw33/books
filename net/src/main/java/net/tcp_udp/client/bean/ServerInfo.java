@@ -1,4 +1,4 @@
-package net.c5.client.bean;
+package net.tcp_udp.client.bean;
 
 /**
  * @Author lw

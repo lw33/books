@@ -1,6 +1,6 @@
-package net.c5.client;
+package net.chatroom.client;
 
-import net.c5.client.bean.ServerInfo;
+import net.chatroom.client.bean.ServerInfo;
 
 /**
  * @Author lw

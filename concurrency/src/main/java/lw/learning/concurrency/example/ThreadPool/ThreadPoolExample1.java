@@ -21,5 +21,9 @@ public class ThreadPoolExample1 {
             });
         }
         executorService.shutdown();
+        for (int i = 0; i < 100; i++) {
+            int finalI = i;
+            executorService.submit(() -> log.info("task: {}", finalI));
+        }
     }
 }

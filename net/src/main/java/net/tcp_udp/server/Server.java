@@ -1,6 +1,6 @@
-package net.c5.server;
+package net.tcp_udp.server;
 
-import net.c5.constants.TCPConstants;
+import net.commons.constants.TCPConstants;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class Server {
         do {
             s = bufferedReader.readLine();
             tcpServer.broadcast(s);
-        } while ("bbyyee".equalsIgnoreCase(s));
+        } while (!"bbyyee".equalsIgnoreCase(s));
         ServerProvider.stop();
         tcpServer.stop();
     }

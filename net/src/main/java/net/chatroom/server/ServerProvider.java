@@ -1,10 +1,9 @@
-package net.c5.server;
+package net.chatroom.server;
 
 
-import net.c5.constants.TCPConstants;
-import net.c5.constants.UDPConstants;
-import net.util.ByteUtils;
-import net.util.Tools;
+import net.commons.constants.UDPConstants;
+import net.commons.util.ByteUtils;
+import net.commons.util.Tools;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -81,7 +80,7 @@ public class ServerProvider {
                         ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
                         byteBuffer.put(UDPConstants.HEADER);
                         byteBuffer.putShort((short) 2);
-                        byteBuffer.putInt(TCPConstants.SERVER_PORT);
+                        byteBuffer.putInt(port);
                         byteBuffer.put(sn);
                         int len = byteBuffer.position();
                         DatagramPacket datagramPacket = new DatagramPacket(buffer, len, receivePacket.getAddress(), responsePort);

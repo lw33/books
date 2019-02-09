@@ -1,7 +1,7 @@
-package net.c5.server;
+package net.tcp_udp.server;
 
 import lombok.extern.slf4j.Slf4j;
-import net.c5.server.handler.ClientHandler;
+import net.tcp_udp.server.handler.ClientHandler;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -18,7 +18,9 @@ public class TCPServer {
 
     private final int port;
     private ClientListener mListener;
+    // 客户端处理器列表
     private List<ClientHandler> clientHandlerList = new ArrayList<>();
+
     public TCPServer(int serverPort) {
         port = serverPort;
     }
@@ -65,8 +67,14 @@ public class TCPServer {
                 } catch (IOException e) {
                     continue;
                 }
-                ClientHandler clientHandler = new ClientHandler(client);
-                clientHandler.readToPrint();
+                try {
+
+                    ClientHandler clientHandler = new ClientHandler(client, handler -> clientHandlerList.remove(handler));
+                    clientHandler.readToPrint();
+                    clientHandlerList.add(clientHandler);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } while (running);
         }
 

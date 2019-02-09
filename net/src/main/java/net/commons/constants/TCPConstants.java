@@ -1,4 +1,4 @@
-package net.c5.constants;
+package net.commons.constants;
 
 /**
  * @Author lw

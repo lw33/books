@@ -1,8 +1,8 @@
-package net.c5.client;
+package net.chatroom.client;
 
-import net.c5.client.bean.ServerInfo;
-import net.c5.constants.UDPConstants;
-import net.util.ByteUtils;
+import net.chatroom.client.bean.ServerInfo;
+import net.commons.constants.UDPConstants;
+import net.commons.util.ByteUtils;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -23,6 +23,7 @@ public class ClientSearcher {
     public static final int LISTEN_PORT = UDPConstants.CLIENT_REPONSE_PROT;
 
     public static ServerInfo seacherServer(int timeout) throws InterruptedException {
+
         System.out.println("UDPSearcher Started...");
         CountDownLatch receiveLatch = new CountDownLatch(1);
         Listener listener = null;
@@ -40,8 +41,8 @@ public class ClientSearcher {
         List<ServerInfo> serverAndClose = listener.getServerAndClose();
 
         return serverAndClose.size() > 0 ? serverAndClose.get(0) : null;
-    }
 
+    }
 
     private static Listener listen(CountDownLatch receiveLatch) throws InterruptedException {
         System.out.println("UDPSearcher listen start...");
@@ -53,6 +54,7 @@ public class ClientSearcher {
     }
 
     private static void sendBroadcast() throws IOException {
+
         DatagramSocket datagramSocket = new DatagramSocket();
         System.out.println("UDPSearcher sendBroadcast start...");
 
@@ -66,8 +68,8 @@ public class ClientSearcher {
         datagramSocket.send(datagramPacket);
         datagramSocket.close();
         System.out.println("UDPSearcher sendBroadcast finished...");
-    }
 
+    }
 
     private static class Listener extends Thread {
         private final int listenPort;
@@ -144,4 +146,5 @@ public class ClientSearcher {
             return serverInfos;
         }
     }
+
 }
