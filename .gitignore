@@ -4,6 +4,7 @@ target/
 .mvn
 mvnw
 mvnw.cmd
+net
 
 ### STS ###
 .apt_generated
