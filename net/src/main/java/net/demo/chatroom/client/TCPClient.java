@@ -1,8 +1,8 @@
-package net.chatroom.client;
+package net.demo.chatroom.client;
 
 import lombok.extern.slf4j.Slf4j;
-import net.chatroom.client.bean.ServerInfo;
 import net.commons.util.CloseUtils;
+import net.demo.chatroom.client.bean.ServerInfo;
 
 import java.io.*;
 import java.net.InetAddress;
