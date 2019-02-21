@@ -1,7 +1,10 @@
 package lw.learning.springboot.webmvc.controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -29,9 +32,9 @@ public class HelloControllerAdvice {
     public String acceptLanguage(@RequestHeader("Accept-Language") String acceptLanguage) {
         return acceptLanguage;
     }
-     @ModelAttribute("jsessionId")
+    /* @ModelAttribute("jsessionId")
     public String jsessionId(@CookieValue("JSESSIONID") String jsessionId) {
         return jsessionId;
-    }
+    }*/
 
 }

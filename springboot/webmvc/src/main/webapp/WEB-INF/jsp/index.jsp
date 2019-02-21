@@ -2,6 +2,6 @@
     <body>
     <message>${message}</message>
     <language>${acceptLanguage}</language>
-    <jsessionId>${jsessionId}</jsessionId>
+    <%--<jsessionId>${jsessionId}</jsessionId>--%>
     </body>
 </jsp:root>
